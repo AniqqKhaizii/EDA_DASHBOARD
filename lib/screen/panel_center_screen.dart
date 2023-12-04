@@ -1,9 +1,25 @@
-import 'dart:html';
-import 'dart:ui' as ui;
+// ignore_for_file: unnecessary_new, prefer_const_constructors, unnecessary_string_interpolations, avoid_print
 
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:eda_mphs_dashboard/widget/charts.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:timer_builder/timer_builder.dart';
+
+final List<String> items = [
+  'Item1',
+  'Item2',
+  'Item3',
+  'Item4',
+];
+String? selectedValue;
+
+final String currentTime = getSystemTime();
+
+String getSystemTime() {
+  var now = new DateTime.now();
+  return new DateFormat("HH:mm:ss a").format(now);
+}
 
 class PanelCenterScreen extends StatefulWidget {
   const PanelCenterScreen({super.key});
@@ -13,36 +29,6 @@ class PanelCenterScreen extends StatefulWidget {
 }
 
 class _PanelCenterScreenState extends State<PanelCenterScreen> {
-  final IFrameElement _iFrameElement = IFrameElement();
-
-  @override
-  void initState() {
-    _iFrameElement.style.height = '50%';
-    _iFrameElement.style.width = '50%';
-    _iFrameElement.src =
-        'https://free.timeanddate.com/clock/i92b560r/n122/tlmy40/fn16/fs20/tct/pct/ftb/pd2/th2';
-    _iFrameElement.style.border = 'none';
-
-    //ignore: undefined_prefixed_name
-    ui.plateformViewRegistry
-        .registerViewFactory('iFrameElement', (int ViewId) => _iFrameElement);
-
-    super.initState();
-  }
-
-  final Widget _iframeWidget = HtmlElementView(
-    viewType: 'iframeElement',
-    key: UniqueKey(),
-  );
-
-  final List<String> items = [
-    'Item1',
-    'Item2',
-    'Item3',
-    'Item4',
-  ];
-  String? selectedValue;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -81,16 +67,27 @@ class _PanelCenterScreenState extends State<PanelCenterScreen> {
                   buttonStyleData: const ButtonStyleData(
                     padding: EdgeInsets.symmetric(horizontal: 16),
                     height: 50,
-                    width: 300,
+                    width: 420,
                   ),
                 ),
               ),
               Container(
                 margin: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-                width: 530, // Set the desired width
+                width: 410, // Set the desired width
                 height: 50, // Set the desired height
                 color: Colors.amberAccent,
-                child: _iframeWidget,
+                child: TimerBuilder.periodic(Duration(seconds: 1),
+                    builder: (context) {
+                  print("${getSystemTime()}");
+                  return Text(
+                    "${getSystemTime()}",
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 30,
+                        fontWeight: FontWeight.w700),
+                    textAlign: TextAlign.center,
+                  );
+                }),
               ),
             ],
           ),
