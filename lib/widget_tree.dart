@@ -1,3 +1,4 @@
+import 'package:eda_mphs_dashboard/screen/data_table.dart';
 import 'package:flutter/material.dart';
 import 'package:eda_mphs_dashboard/widget/responsive_layout.dart';
 import 'screen/panel_left_screen.dart';
@@ -41,17 +42,6 @@ class _WidgetTreeState extends State<WidgetTree> {
                     Expanded(child: PanelRightScreen())
                   ],
                 ),
-                computer: const Row(
-                  children: [
-                    Expanded(
-                      flex: 13, // 65% width
-                      child: PanelLeftScreen(),
-                    ),
-                    Expanded(
-                      flex: 10, // 45% width
-                      child: PanelCenterScreen(),
-                    ),
-                  ],
-                ))));
+                computer: MphsData())));
   }
 }

@@ -1,3 +1,5 @@
+// ignore_for_file: sized_box_for_whitespace
+
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:eda_mphs_dashboard/widget/bar_chat.dart';
 import 'package:flutter/material.dart';
